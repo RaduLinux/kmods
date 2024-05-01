@@ -1,13 +1,8 @@
 FROM quay.io/fedora-ostree-desktops/silverblue:40 as builder
 
-RUN rpm-ostree install \
-  kernel-devel \
-  kernel-devel-matched \
-  akmods \
-  mock \
-  binutils
+COPY build-*.sh /tmp/
 
-COPY build-nvidia-kmod.sh /tmp/
+RUN /tmp/build-prep.sh
 
 RUN /tmp/build-nvidia-kmod.sh
 
